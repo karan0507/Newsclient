@@ -1,1 +1,43 @@
-<p>login works!</p>
+<div class="align-items-center" style="margin-top:13%">
+    <div class="row justify-content-center">
+        <div class="col-md-4 justify-content-center">
+            <div class="card card-user">
+                <div class="card-header ">
+                    <h5 class="card-title ">Login</h5>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="login">
+                        <div class="row justify-content-center">
+
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" formControlName="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Password</label>
+                                    <input type="password" class="form-control" formControlName="password">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="row ">
+                            <div class="update ml-auto mr-auto ">
+                                <button type="submit " class="btn btn-primary btn-round" (click)="loginfunc()">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
