@@ -1,8 +1,13 @@
-    ::ng-deep .angular-editor .angular-editor-wrapper .angular-editor-textarea {
-       min-height: 300px !important;
-   }
-   
-   label {
-       font-size: medium;
-       color: black;
-   }
+     ::ng-deep .angular-editor .angular-editor-wrapper .angular-editor-textarea {
+        min-height: 300px !important;
+    }
+    
+    label {
+        font-size: medium;
+        color: black;
+    }
+    
+    .md-outline.select-wrapper+label {
+        top: .5em !important;
+        z-index: 2 !important;
+    }
