@@ -41,6 +41,16 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12 px-3">
+                            <div class="form-group">
+                                <label for="">Post Type</label>
+                                <select class="form-control" (change)="onCategories($event.target.value)" formControlName="post_type" name="" id="">
+                                    <option class="option-effect" *ngFor="let item of postTypes" value={{item.post_type}}>{{item.post_type | uppercase}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 pr-1">
                             <label>Upload Thumbnail Image</label>
                             <div class="form-group custom-file">
@@ -70,7 +80,9 @@
                         <div class="col-md-12 px-3">
                             <div class="form-group">
                                 <label for="">Tags</label>
-                                <ng-multiselect-dropdown [placeholder]="'Select Tags'" [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="mymodel" [ngModelOptions]="{standalone: true}" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                <!-- <ng-multiselect-dropdown [placeholder]="'Select Tags'" [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="mymodel" [ngModelOptions]="{standalone: true}" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown> -->
+                                <ng-multiselect-dropdown [placeholder]="'Select Tags'" [settings]="dropdownSettings" [data]="dropdownList" formControlName="tags" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                 </ng-multiselect-dropdown>
                             </div>
                         </div>

@@ -16,29 +16,29 @@ export class PostComponent implements OnInit {
   filedata: any;
   filename = 'Choose an image file';
   // statuscontrol;
-  status = [{status: 'active' }, {status: 'draft'}];
+  status = [{ status: 'active' }, { status: 'draft' }];
   editorConfig: AngularEditorConfig = {
     editable: true,
-      spellcheck: true,
-      height: 'auto',
-      minHeight: '600',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-      ],
-      customClasses: [
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '600',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    customClasses: [
       {
         name: 'quote',
         class: 'quote',
@@ -61,16 +61,18 @@ export class PostComponent implements OnInit {
       ['bold', 'italic'],
       ['fontSize']
     ]
-};
+  };
 
-selectedCategoryId = 1;
-selectedTags;
-selectedStatus;
-dropdownList = [];
+  selectedCategoryId = 1;
+  selectedTags = [];
+  selectedStatus;
+  dropdownList = [];
   selectedItems: Array<any> = [];
   dropdownSettings = {};
   categories: any;
-  constructor(private fb: FormBuilder, private postdb: NewsPostService) { 
+
+  postTypes = [{post_type: 'Level 1'}, {post_type: 'Level 2'}, {post_type: 'Level 3'}];
+  constructor(private fb: FormBuilder, private postdb: NewsPostService) {
     this.news = this.fb.group({
       headline: ['', [Validators.required]],
       editor_name: ['', [Validators.required]],
@@ -79,10 +81,9 @@ dropdownList = [];
       photo_url_string: ['sdad'],
       photo: ['', [Validators.required]],
       categories: ['', [Validators.required]],
-      status: ['' , [Validators.required]],
-      // tags: ['', [Validators.required]],
-      // tags:  ['', Validators.required],
-      post_type: ['sdasd', [Validators.required]]
+      status: ['', [Validators.required]],
+      tags: ['', Validators.required],
+      post_type: ['', [Validators.required]]
     });
   }
 
@@ -117,13 +118,8 @@ dropdownList = [];
 
   }
   onItemSelect(item: any) {
-    
-    console.log(this.mymodel[0]['id']);
 
-  //   this.mymodel.keys(id).forEach(function(id) {  
-  //   console.log(data['id'].id);       
-  //   console.log(data['id'].name);  
-  // });
+  
 
   }
   onSelectAll(items: any) {
@@ -133,32 +129,26 @@ dropdownList = [];
   onStatus() {
     console.log('status');
   }
-  fileEvent(event){
+  fileEvent(event) {
     console.log(event);
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       // console.log(file);
       this.filename = file.name;
-      this.news.get('photo').setValue(file, {emitModelToViewChange: false});
+      this.news.get('photo').setValue(file, { emitModelToViewChange: false });
     }
-    }
+  }
 
-    create(){
-      console.log(this.news.get('tags.id'));
-    }
+  create() {
+    console.log(this.news.get('tags.id'));
+  }
 
- 
+
   createPost() {
-
-    console.log(this.mymodel);
-    // const finalArray = this.news.get('tags').value.map(function (obj) {
-    //   this.selectedTags.push(obj.id);
-    //   console.log(obj.id);
-    //   const data = [];
-    //   data.push(obj.id);
-    //   console.log(data);
-    // });
-    // console.log(finalArray);
+    this.news.get('tags').value.map(res => {
+      this.selectedTags.push(res.id);
+      console.log(this.selectedTags);
+    });
     const formData = new FormData();
     formData.append('image', this.news.get('photo').value);
     formData.append('headline', this.news.get('headline').value);
@@ -168,9 +158,9 @@ dropdownList = [];
     // formData.append('photo_url_string', this.news.get('photo_url_string').value);
     formData.append('categories_id', this.news.get('categories').value);
     formData.append('status', this.news.get('status').value);
-    formData.append('tags_id', this.selectedTags);
+    formData.append('tags_id', JSON.stringify(this.selectedTags));
     formData.append('post_type', this.news.get('post_type').value);
-    
+
     this.postdb.setPosts(formData).subscribe(posts => {
       console.log(posts);
       this.posts = posts;
