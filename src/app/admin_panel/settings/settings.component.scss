@@ -1,0 +1,22 @@
+:ng-deep .mat-tab-body-content {
+    overflow: -moz-hidden-unscrollable !important;
+}
+
+::ng-deep .mat-tab-body-content {
+    height: 100%;
+    overflow: visible !important;
+}
+
+::ng-deep .mat-tab-body.mat-tab-body-active {
+    height: 100%;
+}
+
+label {
+    font-size: larger;
+    font-weight: 400;
+    color: black;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}

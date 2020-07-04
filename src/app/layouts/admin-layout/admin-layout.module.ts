@@ -8,6 +8,7 @@ import { DashboardComponent } from 'src/app/admin_panel/dashboard/dashboard.comp
 import { AdminSideNavComponent } from 'src/app/component/admin-side-nav/admin-side-nav.component';
 import { PostComponent } from 'src/app/admin_panel/post/post.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     RouterModule.forChild(AdminLayoutRoutes),
     NgbModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule, 
+    NgMultiSelectDropDownModule.forRoot(),
     AngularEditorModule
 
   ],

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './admin_panel/login/login.component';
 import { PostComponent } from './admin_panel/post/post.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 import { AdminSideNavComponent } from './component/admin-side-nav/admin-side-nav.component';
@@ -21,6 +22,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
 import { SettingsComponent } from './admin_panel/settings/settings.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,9 @@ import { SettingsComponent } from './admin_panel/settings/settings.component';
     AdminSideNavModule,
     ReactiveFormsModule,
     FormsModule,
+    MatTabsModule,
+    NgMultiSelectDropDownModule.forRoot(),
+
     HttpClientModule
   ],
   providers: [

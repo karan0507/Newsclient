@@ -37,7 +37,7 @@
                     <div class="col-7 col-md-8">
                         <div class="numbers">
                             <p class="card-category">NO. OF POSTS</p>
-                            <p class="card-title">1,345
+                            <p class="card-title">{{postCount}}
                                 <p>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
         <div class="card ">
             <div class="card-header ">
                 <h5 class="card-title">POST/NEWS</h5>
-                <p style="float:right;"><button>Create New</button></p>
+                <p style="float:right;"><button class="form-control" [routerLink]="['/post']">Create New</button></p>
                 <p class="card-category">24 Hours performance</p>
             </div>
             <div class="card-body ">
@@ -120,27 +120,36 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering
                     engine: activate to sort
-                    column descending" style="width: 170px;">SR NO
+                    column descending" style="width: 30px;">SR NO
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser:
                     activate to sort column
                     ascending" style="width:
                     219px;">
-                                Name</th>
+                                Headline</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s):
                     activate to sort column
                     ascending" style="width:
                     194px;">
-                                Phone No.</th>
+                                Editor Name</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine
                     version: activate to
-                    sort column ascending" style="width: 143px;">Address</th>
+                    sort column ascending" style="width: 143px;">Photo</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine
                     version: activate to
-                    sort column ascending" style="width: 143px;">Edit</th>
+                    sort column ascending" style="width: 143px;">Subject</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine
                     version: activate to
-                    sort column ascending" style="width: 143px;">Delete</th>
+                    sort column ascending" style="width: 80px;">Status</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine
+                    version: activate to
+                    sort column ascending" style="width: 143px;">Date</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine
+                    version: activate to
+                    sort column ascending" style="width: 70px;">Edit</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine
+                    version: activate to
+                    sort column ascending" style="width: 70px;">Delete</th>
                             <!-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">{{email}}
 </th>
 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">{{balance}}
@@ -151,17 +160,28 @@
 
 
                         <tr role="row" class="odd" *ngFor="let post of
-                posts ">
-                            <!-- <td class="sorting_1">{{i}}</td> -->
+                posts; let i = index; ">
+                            <td class="sorting_1">{{i}}</td>
+                            <!-- <td></td> -->
                             <td>{{post?.headline }}
                             </td>
                             <td>{{post?.editor_name}}</td>
+                            <td><img src="{{post?.photo_url_string}}" alt=""></td>
                             <td>{{post?.subject}}</td>
-                            <!-- <td>{{post?.post_content}}</td> -->
-
-
-                            <!-- <td>{{customer.email_address}}</td>
-<td> {{customer?.bal}}</td> -->
+                            <td>{{post?.status}}</td>
+                            <td>{{post?.created_at | date:'longDate' }}</td>
+                            <td (click)="edit()" class="justify-content-center">
+                                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+                                    <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+                                  </svg>
+                            </td>
+                            <td (click)="delete()" class="justify-content-center">
+                                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                  </svg>
+                            </td>
                         </tr>
 
 
@@ -178,7 +198,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-4">
         <div class="card ">
             <div class="card-header ">
@@ -223,4 +243,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

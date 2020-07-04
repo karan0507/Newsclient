@@ -9,16 +9,39 @@ import { NewsPostService } from 'src/app/adminService/news-post.service';
 export class DashboardComponent implements OnInit {
   searchText;
   posts: Array<any> = [];
+  postCount: any;
   constructor(private postdb: NewsPostService) { }
-
+  
   ngOnInit(): void {
     this.getPosts();
+    this.getPostsCount();
   }
 
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+  
   getPosts() {
     this.postdb.getPosts().subscribe(posts => {
       console.log(posts);
       this.posts = posts;
     });
+  }
+
+  getPostsCount() {
+    this.postdb.getPostCount().subscribe(res => {
+      console.log(res);
+      this.postCount = res;
+    });
+  }
+  edit() {
+
+  }
+
+  delete() {
+
   }
 }
