@@ -71,7 +71,7 @@ export class PostComponent implements OnInit {
   dropdownSettings = {};
   categories: any;
 
-  postTypes = [{post_type: 'Level 1'}, {post_type: 'Level 2'}, {post_type: 'Level 3'}];
+  postTypes = [{post_type: 'Level 1'}, {post_type: 'Level 2'}, {post_type: 'Level 3'}, {post_type: 'normal'}];
   constructor(private fb: FormBuilder, private postdb: NewsPostService) {
     this.news = this.fb.group({
       headline: ['', [Validators.required]],

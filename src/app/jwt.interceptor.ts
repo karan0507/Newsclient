@@ -3,14 +3,17 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const jwt = JSON.parse(localStorage.getItem('token'));
@@ -21,6 +24,14 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       });
     }
-    return next.handle(req);
+    return next.handle(req).pipe( tap(() => {},
+      (err: any) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status !== 401) {
+         return;
+        }
+        this.router.navigate(['login']);
+      }
+    }));
   }
 }
