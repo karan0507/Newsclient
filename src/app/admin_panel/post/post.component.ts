@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NewsPostService } from 'src/app/adminService/news-post.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post',
@@ -72,7 +73,7 @@ export class PostComponent implements OnInit {
   categories: any;
 
   postTypes = [{post_type: 'Level 1'}, {post_type: 'Level 2'}, {post_type: 'Level 3'}, {post_type: 'normal'}];
-  constructor(private fb: FormBuilder, private postdb: NewsPostService) {
+  constructor(private fb: FormBuilder, private postdb: NewsPostService, private toastr: ToastrService) {
     this.news = this.fb.group({
       headline: ['', [Validators.required]],
       editor_name: ['', [Validators.required]],
@@ -139,10 +140,6 @@ export class PostComponent implements OnInit {
     }
   }
 
-  create() {
-    console.log(this.news.get('tags.id'));
-  }
-
 
   createPost() {
     this.news.get('tags').value.map(res => {
@@ -164,6 +161,10 @@ export class PostComponent implements OnInit {
     this.postdb.setPosts(formData).subscribe(posts => {
       console.log(posts);
       this.posts = posts;
+    }, (error) => {
+        this.toastr.error('Please complete the form', 'Incomplete');
+    }, () => {
+        this.toastr.success('Post Created Successfully', 'New Post Addded');
     });
   }
 

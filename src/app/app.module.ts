@@ -23,6 +23,7 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { JwtInterceptor } from './jwt.interceptor';
 import { SettingsComponent } from './admin_panel/settings/settings.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     ReactiveFormsModule,
     FormsModule,
     MatTabsModule,
+    ToastrModule.forRoot(), // ToastrModule added
+
     NgMultiSelectDropDownModule.forRoot(),
 
     HttpClientModule

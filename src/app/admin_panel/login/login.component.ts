@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/adminService/auth.service';
 import { Title } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ import { Title } from '@angular/platform-browser';
 })
 export class LoginComponent implements OnInit {
   login: FormGroup;
-  constructor(private auth: AuthService, private fb: FormBuilder,  private router: Router, private title: Title) {
+  constructor(private auth: AuthService, 
+              private fb: FormBuilder,  private router: Router, 
+              private title: Title, private toastr: ToastrService) {
     this.login = this.fb.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -32,7 +35,8 @@ export class LoginComponent implements OnInit {
        console.log(error);
        if (error.statusText === 'Unauthorized')
        {
-          alert('Wrong Pasword');
+          // alert('Wrong Pasword');
+        this.toastr.error('Wrong Password or Username', 'Invalid Details');
        }
     }
 

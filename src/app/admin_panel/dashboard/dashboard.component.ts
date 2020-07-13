@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   
   getPosts() {
     this.postdb.getPosts().subscribe(posts => {
-      console.log(posts);
+      console.log('this is post data', posts);
       this.posts = posts;
     });
   }
