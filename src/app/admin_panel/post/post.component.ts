@@ -4,6 +4,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NewsPostService } from 'src/app/adminService/news-post.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-post',
@@ -72,6 +73,11 @@ export class PostComponent implements OnInit {
   dropdownSettings = {};
   categories: any;
 
+
+
+
+
+
   postTypes = [{post_type: 'Level 1'}, {post_type: 'Level 2'}, {post_type: 'Level 3'}, {post_type: 'normal'}];
   constructor(private fb: FormBuilder, private postdb: NewsPostService, private toastr: ToastrService) {
     this.news = this.fb.group({
@@ -89,6 +95,13 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if ( sessionStorage.getItem('form') !== null){
+    this.news.setValue(JSON.parse(sessionStorage.getItem('form')));
+    }
+    this.news.valueChanges.subscribe(form => {
+      console.log(form);
+      sessionStorage.setItem('form', JSON.stringify(form));
+    });
     this.getCategories();
     this.getTags();
     // this.dropdownList = [
@@ -165,6 +178,7 @@ export class PostComponent implements OnInit {
         this.toastr.error('Please complete the form', 'Incomplete');
     }, () => {
         this.toastr.success('Post Created Successfully', 'New Post Addded');
+        this.news.reset();
     });
   }
 
@@ -180,5 +194,10 @@ export class PostComponent implements OnInit {
       console.log();
       this.dropdownList = res;
     });
+  }
+
+  deleteSession() {
+    sessionStorage.removeItem('form');
+    this.news.reset();
   }
 }

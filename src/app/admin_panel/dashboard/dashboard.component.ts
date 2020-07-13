@@ -113,7 +113,7 @@ export class DashboardComponent implements OnInit {
   }
 
   delete() {
-
+    console.log('delete clicked');
   }
 
 

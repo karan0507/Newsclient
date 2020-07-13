@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class SettingsComponent implements OnInit {
   settings_categories: FormGroup;
   settings_tags:FormGroup;
+  tagsDeleteId; 
+  categoriesDeleteId;
   tags;
   categories;
   constructor(private newsdb: NewsPostService, private fb: FormBuilder, private toastr: ToastrService) {
@@ -38,9 +40,17 @@ export class SettingsComponent implements OnInit {
     });
   }
 
+  setCategoryDeleteId(cid) {
+    this.categoriesDeleteId = cid;
+  }
 
-  deleteTags(id) {
-    this.newsdb.deleteTags(id).subscribe(res => {
+  setTagsDeleteId(tid) {
+    this.tagsDeleteId = tid;
+  }
+
+  deleteTags() {
+    console.log(this.tagsDeleteId);
+    this.newsdb.deleteTags(this.tagsDeleteId).subscribe(res => {
       console.log(res);
 
     }, (error) => {
@@ -63,10 +73,10 @@ export class SettingsComponent implements OnInit {
   }
 
 
-  deleteCategories(id) {
-    console.log(id);
+  deleteCategories() {
+    // console.log(id);
     console.log('delete categories ');
-    this.newsdb.deleteCategory(id).subscribe(res => {
+    this.newsdb.deleteCategory(this.categoriesDeleteId).subscribe(res => {
       console.log(res);
 
     }, (error) => {
