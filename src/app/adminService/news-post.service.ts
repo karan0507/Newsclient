@@ -11,7 +11,7 @@ export class NewsPostService {
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<any> {
-    return this.http.get(environment.apiUrl + 'post');
+    return this.http.get(environment.apiUrl + 'admin/post');
   }
 
   getPostCount(): Observable<any> {
