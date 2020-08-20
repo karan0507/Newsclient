@@ -28,7 +28,10 @@
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Editor Name</label>
-                                <input type="email" class="form-control" formControlName="editor_name">
+                                <input type="email" id="editor_name" class="form-control" formControlName="editor_name">
+                                <div *ngIf="news.controls['editor_name'].invalid && (news.controls['editor_name'].dirty || news.controls['editor_name'].touched)" style="color:red; text-transform: capitalize;">
+                                   Name cannot be empty!
+                                </div>
                             </div>
                         </div>
 
@@ -38,6 +41,9 @@
                                 <select class="form-control" formControlName="status" name="" id="">
                                     <option class="option-effect" (selected)="onStatus()" *ngFor="let item of status" value={{item.status}}>{{item.status}}</option>
                                 </select>
+                                <div *ngIf="news.controls['status'].invalid && (news.controls['status'].dirty || news.controls['status'].touched)" style="color:red; text-transform: capitalize;">
+                                    Status cannot be empty
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,6 +54,9 @@
                                 <select class="form-control" (change)="onCategories($event.target.value)" formControlName="post_type" name="" id="">
                                     <option class="option-effect" *ngFor="let item of postTypes" value={{item.post_type}}>{{item.post_type | uppercase}}</option>
                                 </select>
+                                <div *ngIf="news.controls['post_type'].invalid && (news.controls['post_type'].dirty || news.controls['post_type'].touched)" style="color:red; text-transform: capitalize;">
+                                    Please provide post type
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -57,6 +66,9 @@
                             <div class="form-group custom-file">
                                 <input type="file" class="form-control" name="file" (change)="fileEvent($event)" formControlName="photo">
                                 <label class=" custom-file-label " #labelImport for="image "><i class="fas fa-search "></i>{{filename}}</label>
+                                <div *ngIf="news.controls['photo'].invalid && (news.controls['photo'].dirty || news.controls['photo'].touched)" style="color:red; text-transform: capitalize;">
+                                    Please put detials
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 pl-1">
@@ -65,6 +77,9 @@
                                 <select class="form-control" (change)="onCategories($event.target.value)" formControlName="categories" name="" id="">
                                     <option class="option-effect" *ngFor="let item of categories" value={{item.id}}>{{item.categories_name | uppercase}}</option>
                                 </select>
+                                <div *ngIf="news.controls['categories'].invalid && (news.controls['categories'].dirty || news.controls['categories'].touched)" style="color:red; text-transform: capitalize;">
+                                    Please provide categories
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,6 +89,9 @@
                             <div class="form-group">
                                 <label>Subject</label>
                                 <input type="text" formControlName="subject" class="form-control">
+                                <div *ngIf="news.controls['subject'].invalid && (news.controls['subject'].dirty || news.controls['subject'].touched)" style="color:red; text-transform: capitalize;">
+                                    Please provide subject
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -90,6 +108,9 @@
                                 <input type="checkbox" [(ngModel)]="bannerselect" [ngModelOptions]="{standalone: true}" name="" id="">
                             </div>
                         </div>
+                        <!-- <div *ngIf="news.controls['headline'].invalid && (news.controls['headline'].dirty || news.controls['headline'].touched)" style="color:red; text-transform: capitalize;">
+                            Please put detials
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-12 px-3">
@@ -99,7 +120,11 @@
                                 </ng-multiselect-dropdown> -->
                                 <ng-multiselect-dropdown [placeholder]="'Select Tags'" [settings]="dropdownSettings" [data]="dropdownList" formControlName="tags" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                 </ng-multiselect-dropdown>
+                                <div *ngIf="news.controls['tags'].invalid && (news.controls['tags'].dirty || news.controls['tags'].touched)" style="color:red; text-transform: capitalize;">
+                                    Please provide subject
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="row ">
