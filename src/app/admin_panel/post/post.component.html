@@ -7,14 +7,18 @@
 
             </div>
             <div class="card-body">
-                <form [formGroup]="news">
+                <form [formGroup]="news" (ngSubmit)="createPost()">
                     <div class="row">
 
                         <div class="col-md-12 px-3">
                             <div class="form-group">
                                 <label>HeadLine</label>
-                                <input type="text" class="form-control" formControlName="headline">
+                                <input type="text" id="headline" class="form-control" formControlName="headline">
+                                <div *ngIf="news.controls['headline'].invalid && (news.controls['headline'].dirty || news.controls['headline'].touched)" style="color:red; text-transform: capitalize;">
+                                    Please put detials
+                                </div>
                             </div>
+
                         </div>
 
                     </div>
@@ -77,13 +81,13 @@
                         <div class="col-md-6 px-3">
                             <div class="form-group">
                                 <label for="">Recent Post</label>
-                                <input type="checkbox" name="" id="">
+                                <input type="checkbox" (change)="recentselect()" name="" id="">
                             </div>
                         </div>
                         <div class="col-md-6 px-3">
                             <div class="form-group">
                                 <label for="">Big Banner Post</label>
-                                <input type="checkbox" name="" id="">
+                                <input type="checkbox" [(ngModel)]="bannerselect" [ngModelOptions]="{standalone: true}" name="" id="">
                             </div>
                         </div>
                     </div>

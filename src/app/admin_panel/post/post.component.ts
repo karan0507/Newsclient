@@ -72,8 +72,8 @@ export class PostComponent implements OnInit {
   selectedItems: Array<any> = [];
   dropdownSettings = {};
   categories: any;
-
-
+  recentIsChecked;
+  bannerIsChecked;
 
 
 
@@ -91,10 +91,13 @@ export class PostComponent implements OnInit {
       status: ['', [Validators.required]],
       tags: ['', Validators.required],
       post_type: ['', [Validators.required]]
+      // recentIsChecked: ['', [Validators.required]],
+      // bannerIsChecked: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
+    console.log(this.bannerIsChecked);
     if ( sessionStorage.getItem('form') !== null){
     this.news.setValue(JSON.parse(sessionStorage.getItem('form')));
     }
@@ -125,6 +128,14 @@ export class PostComponent implements OnInit {
       allowSearchFilter: true
     };
     // this.onStatus();
+  }
+
+  recentselect() {
+    console.log('0');
+  }
+
+  bannerselect() {
+    console.log('0');
   }
 
   onCategories(value) {
@@ -170,7 +181,10 @@ export class PostComponent implements OnInit {
     formData.append('status', this.news.get('status').value);
     formData.append('tags_id', JSON.stringify(this.selectedTags));
     formData.append('post_type', this.news.get('post_type').value);
-
+    // recent_post_is_true
+    // big_banner_is_true
+    formData.append('big_banner_is_true', '0');
+    formData.append('recent_post_is_true', '1');
     this.postdb.setPosts(formData).subscribe(posts => {
       console.log(posts);
       this.posts = posts;
