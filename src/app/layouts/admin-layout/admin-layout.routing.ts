@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from 'src/app/admin_panel/dashboard/dashboard.component';
 import { PostComponent } from 'src/app/admin_panel/post/post.component';
 import { SettingsComponent } from 'src/app/admin_panel/settings/settings.component';
+import { AlertComponent } from 'src/app/admin_panel/alert/alert.component';
 
 
 // import { UserComponent } from '../../pages/user/user.component';
@@ -18,7 +19,8 @@ export const AdminLayoutRoutes: Routes = [
     // { path: 'table',          component: TableComponent },
     // { path: 'typography',     component: TypographyComponent },
     { path: 'post',          component: PostComponent },
-    { path: 'settings',          component: SettingsComponent }
+    { path: 'settings',          component: SettingsComponent },
+    { path: 'alert',          component: AlertComponent }
     // { path: 'maps',           component: MapsComponent },
     // { path: 'notifications',  component: NotificationsComponent },
     // { path: 'upgrade',        component: UpgradeComponent }
