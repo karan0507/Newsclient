@@ -86,6 +86,7 @@ export class NewsPostService {
   }
 
   updateAlert(id, Alert): Observable<any> {
+    console.log('news update alert');
     return this.http.put(environment.apiUrl + 'alert/' + id , Alert);
   }
 

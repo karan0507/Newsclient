@@ -10,8 +10,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AlertComponent implements OnInit {
 alert: FormGroup;
+updateAlertForm: FormGroup;
 alertObj;
   deleteId: any;
+  alertUpdateId: any;
+  
 
   constructor(private fb: FormBuilder, private postdb: NewsPostService, private toastr: ToastrService) { 
     this.alert = this.fb.group(
@@ -19,6 +22,9 @@ alertObj;
         alert_text: ['', [Validators.required]]
       }
     );
+    this.updateAlertForm = this.fb.group({
+      alert_text: ['', [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
@@ -57,11 +63,23 @@ setalertDeleteId(id){
   console.log(this.deleteId)
 }
 
-updateAlert(id, alert){
-
+setUpdateAlertId(id) {
+  this.alertUpdateId = id;
+  console.log(this.alertUpdateId);
 }
 
-deleteAlert(id) {
+updateAlert(){
+ this.postdb.updateAlert(this.alertUpdateId, this.updateAlertForm.value).subscribe(res => {
+   console.log(res);
+   this.toastr.success('Successfully  Updated', res);
+   this.getAlert();
+ },(error) => {
+   this.toastr.error(error, 'Could not update');
+   console.log(error);
+ });
+}
+
+deleteAlert() {
 this.postdb.deleteAlert(this.deleteId).subscribe(res => {
   this.alertObj = res
   console.log(res)
