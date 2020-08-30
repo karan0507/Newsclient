@@ -24,6 +24,7 @@ import { JwtInterceptor } from './jwt.interceptor';
 import { SettingsComponent } from './admin_panel/settings/settings.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ToastrModule } from 'ngx-toastr';
+import { AlertComponent } from './admin_panel/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
   //   ClientHeadNavComponent,
     AdminLayoutComponent,
   SettingsComponent,
+  AlertComponent,
   
   ],
   imports: [

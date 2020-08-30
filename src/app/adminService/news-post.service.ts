@@ -74,4 +74,24 @@ export class NewsPostService {
     return this.http.delete(environment.apiUrl + 'tags/' + id);
   }
 
+  getAlert(): Observable<any>{
+    return this.http.get(environment.apiUrl + 'alert');
+  }
+
+  getAlertById(id): Observable<any> {
+    return this.http.get(environment.apiUrl + 'alert/' + id );
+  }
+
+  postAlert(alert): Observable<any>{
+    return this.http.post(environment.apiUrl + 'alert', alert);
+  }
+
+  updateAlert(id, Alert): Observable<any> {
+    console.log('news update alert');
+    return this.http.put(environment.apiUrl + 'alert/' + id , Alert);
+  }
+
+  deleteAlert(id) {
+    return this.http.delete(environment.apiUrl + 'alert/' + id);
+  }
 }
