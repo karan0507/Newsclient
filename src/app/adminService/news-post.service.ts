@@ -23,6 +23,7 @@ export class NewsPostService {
   }
 
   setPosts(post): Observable<any>{
+    // return this.http.options(en)
     return this.http.post(environment.apiUrl + 'post' , post );
   }
 
