@@ -123,7 +123,7 @@ dataTable" role="grid" aria-describedby="example1_info">
                     <div class="col-md-12 px-3">
                         <div class="form-group">
                             <label>Alert</label>
-                            <input type="text" class="form-control" formControlName="alert_text">
+                            <input type="text" class="form-control" formControlName="alert_text" value="{{alertUpdateObj?.alert_text}}">
                             <div *ngIf="updateAlertForm.controls['alert_text'].invalid && (updateAlertForm.controls['alert_text'].dirty || updateAlertForm.controls['alert_text'].touched)" style="color:red; text-transform: capitalize;">
                                 Please enter details
                             </div>
@@ -131,12 +131,23 @@ dataTable" role="grid" aria-describedby="example1_info">
                     </div>
                 </div>        
                 <div class="row ">
-                    <div class="update ml-auto mr-auto ">
-                        <button type="submit " class="btn btn-primary btn-round uk-offcanvas-close" (click)="updateAlert()">Update Alert Name</button>
+                    <div class="update ml-auto mr-auto uk-pos">
+                        <button type="submit " class="btn btn-primary btn-round " (click)="updateAlert()"  >Update Alert Name</button>
                     </div>
                 </div>
+                <!-- <div class="row ">
+                    <div class="update ml-auto mr-auto">
+                        <button type="submit " class="btn btn-primary btn-round " (click)="updateAlert()">Update Alert Name</button>
+                    </div>
+                </div> -->
             </form>
         </div>
 
     </div>
 </div>
+<script>
+    function close() {
+        console.log('resdasdasdsad');
+         UIkit.offcanvas('my-id').hide();
+    }
+</script>

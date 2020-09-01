@@ -15,12 +15,18 @@
                                     <div class="form-group">
                                         <label>Tags Name</label>
                                         <input type="text" class="form-control" formControlName="tags_name">
+                                        <div *ngIf="settings_tags.controls['tags_name'].invalid && (settings_tags.controls['tags_name'].dirty || settings_tags.controls['tags_name'].touched)" style="color:red; text-transform: capitalize;">
+                                            Please enter details
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-5 ml-5">
                                     <div class="form-group">
                                         <label>Tags Description</label>
                                         <input type="text" class="form-control" formControlName="tags_desc">
+                                        <div *ngIf="settings_tags.controls['tags_desc'].invalid && (settings_tags.controls['tags_desc'].dirty || settings_tags.controls['tags_desc'].touched)" style="color:red; text-transform: capitalize;">
+                                            Please enter details
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -40,12 +46,18 @@
                                     <div class="form-group">
                                         <label>Categories Name</label>
                                         <input type="text" class="form-control" formControlName="categories_name">
+                                        <div *ngIf="settings_categories.controls['categories_name'].invalid && (settings_categories.controls['categories_name'].dirty || settings_categories.controls['categories_name'].touched)" style="color:red; text-transform: capitalize;">
+                                            Please enter details
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-5 ml-5">
                                     <div class="form-group">
                                         <label>Categories Description</label>
                                         <input type="text" class="form-control" formControlName="categories_desc">
+                                        <div *ngIf="settings_categories.controls['categories_desc'].invalid && (settings_categories.controls['categories_desc'].dirty || settings_categories.controls['categories_desc'].touched)" style="color:red; text-transform: capitalize;">
+                                            Please enter details
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +120,7 @@
                                     <td>{{post?.tags_name }}
                                         <td>{{post?.tags_desc }}
                                             <!-- <td>{{post?.created_at | date:'longDate' }}</td> -->
-                                            <td (click)="editTags()" class="justify-content-center">
+                                            <td uk-toggle="target: #tags-uk" (click)="setTagsEditId(post.id)" class="justify-content-center">
                                                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
                                                     <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
@@ -163,13 +175,13 @@
                                     <td>{{category?.categories_name}}</td>
                                     <td>{{category?.categories_desc}}</td>
                                     <!--<td>{{category?.created_at | date:'longDate' }}</td> -->
-                                    <td (click)="editTags()" class="justify-content-center">
+                                    <td uk-toggle="target: #categories-uk" (click)="setCategoriesEditId(category?.id)" class="justify-content-center">
                                         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
                                                     <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
                                                   </svg>
                                     </td>
-                                    <td data-toggle="modal" data-target="#exampleModal" (click)="setCategoryDeleteId(category.id)" class="justify-content-center">
+                                    <td data-toggle="modal" data-target="#categoriesModal" (click)="setCategoryDeleteId(category.id)" class="justify-content-center">
                                         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -194,7 +206,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-danger">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Post?</h5>
+                <h5 class="modal-title" id="tagsModalLabel">Delete Post?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -204,17 +216,17 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" (click)="deleteTags()">Confirm Delete</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteTags()">Confirm Delete</button>
             </div>
         </div>
     </div>
 </div>
 <!-- Categories Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="categoriesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-danger">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Post?</h5>
+                <h5 class="modal-title" id="categoriesModalLabel">Delete Post?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -224,8 +236,84 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" (click)="deleteCategories()">Confirm Delete</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteCategories()">Confirm Delete</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- tags canvas -->
+<div id="tags-uk" uk-offcanvas="flip:true">
+    <div class="uk-offcanvas-bar" style="width: 800px;">
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        <div class="">
+            <form [formGroup]="settings_update_tags">
+                <div class="row">
+
+                    <div class="col-md-6 px-3">
+                        <div class="form-group">
+                            <label class="update-label">Tag Name</label>
+                            <input type="text" class="form-control" formControlName="tags_name" value="{{tagid?.tags_name}}">
+                            <div *ngIf="settings_update_tags.controls['tags_name'].invalid && (settings_update_tags.controls['tags_name'].dirty || settings_update_tags.controls['tags_name'].touched)" style="color:red; text-transform: capitalize;">
+                                Please enter details
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-3">
+                        <div class="form-group">
+                            <label class="update-label">Tag Description</label>
+                            <input type="text" class="form-control" formControlName="tags_desc" value="{{tagid?.tags_desc}}">
+                            <div *ngIf="settings_update_tags.controls['tags_desc'].invalid && (settings_update_tags.controls['tags_desc'].dirty || settings_update_tags.controls['tags_desc'].touched)" style="color:red; text-transform: capitalize;">
+                                Please enter details
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+                <div class="row ">
+                    <div class="update ml-auto mr-auto ">
+                        <button type="submit " class="btn btn-primary btn-round" (click)="editTags()">Update Tags Name</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- categories canvas -->
+<div id="categories-uk" uk-offcanvas="flip:true">
+    <div class="uk-offcanvas-bar" style="width: 800px;">
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        <div class="">
+            <form [formGroup]="settings_update_categories">
+                <div class="row">
+
+                    <div class="col-md-6 px-3">
+                        <div class="form-group">
+                            <label class="update-label">Category Name</label>
+                            <input type="text" class="form-control" formControlName="categories_name" value="{{categoryById?.categories_name}}">
+                            <div *ngIf="settings_update_categories.controls['categories_name'].invalid && (settings_update_categories.controls['categories_name'].dirty || settings_update_categories.controls['categories_name'].touched)" style="color:red; text-transform: capitalize;">
+                                Please enter details
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-3">
+                        <div class="form-group">
+                            <label class="update-label">Category Description</label>
+                            <input type="text" class="form-control" formControlName="categories_desc" value="{{categoryById?.categories_desc}}">
+                            <div *ngIf="settings_update_categories.controls['categories_desc'].invalid && (settings_update_categories.controls['categories_desc'].dirty || settings_update_categories.controls['categories_desc'].touched)" style="color:red; text-transform: capitalize;">
+                                Please enter details
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+                <div class="row ">
+                    <div class="update ml-auto mr-auto ">
+                        <button type="submit " class="btn btn-primary btn-round" (click)="editCategories()">Update Tags Name</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>

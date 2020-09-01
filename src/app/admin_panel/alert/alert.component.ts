@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NewsPostService } from 'src/app/adminService/news-post.service';
 import { ToastrService } from 'ngx-toastr';
+import * as uikit from 'uikit';
 
 @Component({
   selector: 'app-alert',
@@ -14,9 +15,10 @@ updateAlertForm: FormGroup;
 alertObj;
   deleteId: any;
   alertUpdateId: any;
+  alertUpdateObj: any;
   
 
-  constructor(private fb: FormBuilder, private postdb: NewsPostService, private toastr: ToastrService) { 
+  constructor(private fb: FormBuilder, private postdb: NewsPostService, private toastr: ToastrService ) { 
     this.alert = this.fb.group(
       {
         alert_text: ['', [Validators.required]]
@@ -53,7 +55,7 @@ getAlert() {
 
 getAlertById(id) {
   this.postdb.getAlertById(id).subscribe(res => {
-   this.alertObj = res
+   this.alertUpdateObj = res;
     console.log(res);
   })
 }
@@ -66,6 +68,7 @@ setalertDeleteId(id){
 setUpdateAlertId(id) {
   this.alertUpdateId = id;
   console.log(this.alertUpdateId);
+  this.getAlertById(id);
 }
 
 updateAlert(){
@@ -73,6 +76,9 @@ updateAlert(){
    console.log(res);
    this.toastr.success('Successfully  Updated', res);
    this.getAlert();
+   uikit.offcanvas('#my-id').hide();
+
+
  },(error) => {
    this.toastr.error(error, 'Could not update');
    console.log(error);

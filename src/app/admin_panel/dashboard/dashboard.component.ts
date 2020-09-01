@@ -91,6 +91,7 @@ export class DashboardComponent implements OnInit {
       tags: ['', Validators.required],
       post_type: ['', [Validators.required]]
     });
+    console.log(this.news.value);
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
