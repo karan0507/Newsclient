@@ -198,6 +198,7 @@ export class DashboardComponent implements OnInit {
   }
 
   confirmDelete() {
+    console.log(this.selectedPost);
     this.postdb.deletePost(this.selectedPost).subscribe(res => {
       console.log(res);
     }, (error) => {

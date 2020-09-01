@@ -30,7 +30,7 @@
                                 <label for="exampleInputEmail1">Editor Name</label>
                                 <input type="email" id="editor_name" class="form-control" formControlName="editor_name">
                                 <div *ngIf="news.controls['editor_name'].invalid && (news.controls['editor_name'].dirty || news.controls['editor_name'].touched)" style="color:red; text-transform: capitalize;">
-                                   Name cannot be empty!
+                                    Name cannot be empty!
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                         <div class="col-md-12 px-3">
                             <div class="form-group">
                                 <label for="">Content</label>
-                                <angular-editor formControlName="post_content" [config]="editorConfig"></angular-editor>
+                                <angular-editor formControlName="post_content" [config]="config2" (ngModelChange)="onChange2($event)"></angular-editor>
                             </div>
                         </div>
                     </div>

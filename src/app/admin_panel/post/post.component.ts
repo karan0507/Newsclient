@@ -27,7 +27,7 @@ export class PostComponent implements OnInit {
     maxHeight: 'auto',
     width: 'auto',
     minWidth: '0',
-    translate: 'yes',
+    translate: 'no',
     enableToolbar: true,
     showToolbar: true,
     placeholder: 'Enter text here...',
@@ -55,14 +55,46 @@ export class PostComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
-    uploadWithCredentials: false,
+
+   
+    // uploadUrl: 'v1/image',
     sanitize: true,
     toolbarPosition: 'top',
     // toolbarHiddenButtons: [
     //   ['bold', 'italic'],
     //   ['fontSize']
     // ]
+  };
+
+
+
+  config2: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    minHeight: '5rem',
+    maxHeight: '15rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    sanitize: true,
+    toolbarPosition: 'bottom',
+    defaultFontName: 'Comic Sans MS',
+    defaultFontSize: '5',
+    defaultParagraphSeparator: 'p',
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ]
   };
 
   selectedCategoryId = 1;
@@ -147,6 +179,11 @@ export class PostComponent implements OnInit {
   
 
   }
+
+
+  onChange2(event) {
+    console.log('changed', event);
+  }
   onSelectAll(items: any) {
     console.log(items);
   }
@@ -189,6 +226,7 @@ export class PostComponent implements OnInit {
       console.log(posts);
       this.posts = posts;
     }, (error) => {
+        console.log(error);
         this.toastr.error('Please complete the form', 'Incomplete');
     }, () => {
         this.toastr.success('Post Created Successfully', 'New Post Addded');
